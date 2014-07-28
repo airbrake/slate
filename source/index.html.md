@@ -3,16 +3,9 @@ title: Airbrake API Reference
 
 language_tabs:
   - shell
-  - ruby
-  - python
-  - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
-
-includes:
-  - errors
+  - <a href="https://airbrake.io">Airbrake.io</a>
 
 search: true
 ---
@@ -25,7 +18,7 @@ search: true
 curl "api_endpoint_here?key=(PROJECT_KEY|USER_KEY)"
 ```
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Airbrake uses API keys to restrict access to the API. There are several kinds of keys:
 
 - Project API key (`PROJECT_KEY`) that is used to submit errors and track deploys. This key is what you configure the notifier agent in your app to use.
 - User API key (`USER_KEY`) is used to access to the project data through Airbrake APIs. Each user of a project has their own key.
@@ -171,13 +164,7 @@ See [POST Data Fields](#post-data-fields-v3) &
 curl -X POST -H "Content-Type: application/json" -d JSON "https://airbrake.io/api/v3/projects/PROJECT_ID/notices?key=PROJECT_KEY"
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
+> Example JSON for the above request:
 
 ```json
 {
@@ -450,14 +437,33 @@ The API returns `200 OK` status code on success.
 curl -X POST -H "Content-Type: application/json" -d '{"environment":"production","username":"john","repository":"https://github.com/airbrake/airbrake","revision":"38748467ea579e7ae64f7815452307c9d05e05c5","version":"v2.0"}' "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=PROJECT_KEY"
 ```
 
-```javascript
-const kittn = require('kittn');
+### HTTP request
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+`POST https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=PROJECT_KEY`
+
+### POST data
+
+The API expects JSON data.
+
+Key | Example
+--- | -------
+environment | production
+username | john
+repository | https://github.com/airbrake/airbrake
+revision | 38748467ea579e7ae64f7815452307c9d05e05c5
+version | v2.0
+
+### Response
+
+The API returns `201 Created` status code on success.
+
+## List deploys v4
+
+The API returns list of project deploys. See [Pagination](#pagination) section for supported query parameters and response fields.
+
+```shell
+curl "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=USER_KEY"
 ```
-
-> The above command returns JSON structured like this:
 
 ```json
 {
@@ -587,17 +593,32 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KE
 {
   "group": {
     "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+    "projectId": 1,
+    "resolved": false,
+    "errors": [
+      {
+        "type": "error type",
+        "message": "error message",
+        "backtrace": [
+          {
+            "file": "/path/to/file",
+            "function": "func_name",
+            "line": 1,
+            "column": 0
+          }
+        ]
+      }
+    ],
+    "context": {
+      "environment": "production"
+    },
+    "lastDeployId": "1",
+    "lastDeployAt": "2014-09-26T17:37:33.638348Z",
+    "lastNoticeId": "1",
+    "lastNoticeAt": "2014-09-26T17:37:33.638348Z",
+    "noticeCount": 1,
+    "noticeTotalCount": 1,
+    "createdAt": "2014-09-26T17:37:33.638348Z"
   }
 }
 ```
@@ -880,22 +901,43 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/notice-status/NOTICE_ID?key
 }
 ```
 
-```javascript
-const kittn = require('kittn');
+### Response
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
+The API returns `200 OK` status code on success and JSON data.
+
+Field | Comment
+----- | -------
+code | `processed`, `rejected`, `archived` or `not_found`.
+message | `message` explains `code` in human readable format.
+groupId | `groupId` contains notice group id if notice is processed.
+
+## List versions v4
+
+The API returns list of notice versions. See [Pagination](#pagination) section for supported query parameters and response fields.
+
+```shell
+curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/versions?key=USER_KEY"
 ```
-
-> The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "versions": [
+    {
+      "version": "1.0",
+      "groupId": "1",
+      "noticeTotalCount": 10,
+      "createdAt": "2014-09-26T17:37:33.638348Z",
+      "updatedAt": "2014-09-26T17:37:33.638348Z"
+    },
+    {
+      "version": "1.1",
+      "groupId": "1",
+      "noticeTotalCount": 20,
+      "createdAt": "2014-09-26T17:37:33.638348Z",
+      "updatedAt": "2014-09-26T17:37:33.638348Z"
+    }
+  ],
+  "count": 2
 }
 ```
 
@@ -1000,7 +1042,7 @@ Global grouping rule groups errors by:
 - environment
 - error type
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+## Distinct grouping
 
 Distinct grouping rule groups errors by:
 
