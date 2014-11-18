@@ -277,6 +277,7 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups?key=USER_KEY"
 
 Parameter | Default | Description
 --------- | ------- | -----------
+group_id | | Filters page that contains specified `group_id`. `page` response field can be used to access page number.
 deploy_id | | Filters groups by deploy id.
 environment | | Filters groups by environment.
 component | | Filters groups by component.
