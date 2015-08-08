@@ -5,7 +5,11 @@ language_tabs:
   - shell
 
 toc_footers:
-  - <a href="https://airbrake.io">Airbrake.io</a>
+  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
+
+includes:
+  - errors
 
 search: true
 ---
@@ -18,7 +22,7 @@ search: true
 curl "api_endpoint_here?key=(PROJECT_KEY|USER_KEY)"
 ```
 
-Airbrake uses API keys to restrict access to the API. There are several kinds of keys:
+This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
 - Project API key (`PROJECT_KEY`) that is used to submit errors and track deploys. This key is what you configure the notifier agent in your app to use.
 - User API key (`USER_KEY`) is used to access to the project data through Airbrake APIs. Each user of a project has their own key.
