@@ -107,7 +107,8 @@ Examples of Slate in the Wild
 * [SocialRadar's LocationKit Docs](https://docs.locationkit.io/)
 * [SafetyCulture API Documentation](https://developer.safetyculture.io/)
 * [hosting.de API Documentation](https://www.hosting.de/docs/api/)
-* [CheddarGetter API Documentation](http://docs.cheddargetter.com)
+* [BlockCypher's API Documentation](http://dev.blockcypher.com)
+* [InterServer API Documentation](https://my.interserver.net/apidoc/)
 
 (Feel free to add your site to this list in a pull request!)
 
