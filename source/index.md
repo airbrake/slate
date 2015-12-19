@@ -597,32 +597,17 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KE
 {
   "group": {
     "id": 1,
-    "projectId": 1,
-    "resolved": false,
-    "errors": [
-      {
-        "type": "error type",
-        "message": "error message",
-        "backtrace": [
-          {
-            "file": "/path/to/file",
-            "function": "func_name",
-            "line": 1,
-            "column": 0
-          }
-        ]
-      }
-    ],
-    "context": {
-      "environment": "production"
-    },
-    "lastDeployId": "1",
-    "lastDeployAt": "2014-09-26T17:37:33.638348Z",
-    "lastNoticeId": "1",
-    "lastNoticeAt": "2014-09-26T17:37:33.638348Z",
-    "noticeCount": 1,
-    "noticeTotalCount": 1,
-    "createdAt": "2014-09-26T17:37:33.638348Z"
+    "name": "Fluffums",
+    "breed": "calico",
+    "fluffiness": 6,
+    "cuteness": 7
+  },
+  {
+    "id": 2,
+    "name": "Max",
+    "breed": "unknown",
+    "fluffiness": 5,
+    "cuteness": 10
   }
 }
 ```
@@ -925,23 +910,11 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/versions?ke
 
 ```json
 {
-  "versions": [
-    {
-      "version": "1.0",
-      "groupId": "1",
-      "noticeTotalCount": 10,
-      "createdAt": "2014-09-26T17:37:33.638348Z",
-      "updatedAt": "2014-09-26T17:37:33.638348Z"
-    },
-    {
-      "version": "1.1",
-      "groupId": "1",
-      "noticeTotalCount": 20,
-      "createdAt": "2014-09-26T17:37:33.638348Z",
-      "updatedAt": "2014-09-26T17:37:33.638348Z"
-    }
-  ],
-  "count": 2
+  "id": 2,
+  "name": "Max",
+  "breed": "unknown",
+  "fluffiness": 5,
+  "cuteness": 10
 }
 ```
 
