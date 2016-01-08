@@ -57,25 +57,8 @@ bundle exec middleman server
 
 #### Via Docker (must install it first)
 
-```shell
-docker-compose up
-```
-
-will spin an environment for you, with the `source` directory mapped to the
-container, so you can see your edits instantly after refreshing your browser.
-
-You can now see the docs at http://localhost:4567. Whoa! That was fast!
-
-+*Note: if you're not using Docker natively (i.e. on Linux), the docs will be
-+available at the IP of your docker host. If you're using docker-machine you can
-+retrieve it with `docker-machine ip <your_machine_name>`*
-
-#### Via Vagrant
-```shell
-vagrant up
-```
-
-You can now see the docs at http://localhost:4567.
+*Note: if you're using the Docker setup on OSX, the docs will be
+available at the output of `docker-machine ip <machine-name>` (port: 4567) instead of `localhost:4567`.*
 
 Now that Slate is all set up your machine, you'll probably want to learn more about [editing Slate markdown](https://github.com/tripit/slate/wiki/Markdown-Syntax), or [how to publish your docs](https://github.com/tripit/slate/wiki/Deploying-Slate).
 
