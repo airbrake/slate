@@ -199,6 +199,7 @@ curl -X POST -H "Content-Type: application/json" -d JSON "https://airbrake.io/ap
       "url": "notifier url"
     },
     "os": "Linux 3.5.0-21-generic #32-Ubuntu SMP Tue Dec 11 18:51:59 UTC 2012 x86_64",
+    "hostname": "production-rails-server-1",
     "language": "Ruby 2.1.1",
     "environment": "production",
 
@@ -247,6 +248,7 @@ context/environment | false | The name of the server environment in which the er
 context/component | false | The component or module in which the error occurred. In MVC frameworks like Rails, this should be set to the controller. Otherwise, this can be set to a route or other request category.
 context/action | false | The action in which the error occurred. If each request is routed to a controller action, this should be set here. Otherwise, this can be set to a method or other request subcategory.
 context/os | false | Details of the operating system on which the error occurred.
+context/hostname | false | The hostname of the server on which the error occurred.
 context/language | false | Describe the language on which the error occurred, e.g. "Ruby 2.1.1".
 context/version | false | Describe the application version, e.g. "v1.2.3".
 context/url | false | The application's URL.
