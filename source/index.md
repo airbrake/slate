@@ -896,22 +896,6 @@ code | `processed`, `rejected`, `archived` or `not_found`.
 message | `message` explains `code` in human readable format.
 groupId | `groupId` contains notice group id if notice is processed.
 
-## Show notice source v4
-
-The API shows original notice source data as it was received by Airbrake. It can be either in JSON (v3) or XML (v2) format.
-
-```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/notice-sources/NOTICE_ID?key=USER_KEY"
-```
-
-### HTTP request
-
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/notice-sources/NOTICE_ID?key=USER_KEY`
-
-### Response
-
-The API returns `200 OK` status code on success.
-
 ## List versions v4
 
 The API returns list of notice versions. See [Pagination](#pagination) section for supported query parameters and response fields.
