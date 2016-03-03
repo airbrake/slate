@@ -207,9 +207,11 @@ curl -X POST -H "Content-Type: application/json" -d JSON "https://airbrake.io/ap
     "url:": "http://some-site.com/example",
     "rootDirectory": "/home/app-root-directory",
 
-    "userId": "12345",
-    "userName": "root",
-    "userEmail": "root@root.com"
+    "user": {
+      "id": "12345",
+      "name": "root",
+      "email": "root@root.com"
+    }
   },
   "environment": {
     "PORT": "443",
