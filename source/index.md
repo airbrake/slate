@@ -564,7 +564,7 @@ action | | Filters groups by action.
 archived | | When set to `true` returns archived groups.
 muted | | When set to `true` returns muted groups.
 start_time | | Returns groups created after `start_time`.
-end_time | | Returns groups created before `ned_time`.
+end_time | | Returns groups created before `end_time`.
 order | last_notice | Sorts groups by `last_notice`, `notice_count`, `weight` and `created` fields.
 
 ### Response
