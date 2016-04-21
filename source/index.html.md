@@ -3,6 +3,9 @@ title: Airbrake API Reference
 
 language_tabs:
   - shell
+  - ruby
+  - python
+  - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -168,7 +171,13 @@ See [POST Data Fields](#post-data-fields-v3) &
 curl -X POST -H "Content-Type: application/json" -d JSON "https://airbrake.io/api/v3/projects/PROJECT_ID/notices?key=PROJECT_KEY"
 ```
 
-> Example JSON for the above request:
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+```
+
+> Make sure to replace `meowmeowmeow` with your API key.
 
 ```json
 {
@@ -441,33 +450,14 @@ The API returns `200 OK` status code on success.
 curl -X POST -H "Content-Type: application/json" -d '{"environment":"production","username":"john","repository":"https://github.com/airbrake/airbrake","revision":"38748467ea579e7ae64f7815452307c9d05e05c5","version":"v2.0"}' "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=PROJECT_KEY"
 ```
 
-### HTTP request
+```javascript
+const kittn = require('kittn');
 
-`POST https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=PROJECT_KEY`
-
-### POST data
-
-The API expects JSON data.
-
-Key | Example
---- | -------
-environment | production
-username | john
-repository | https://github.com/airbrake/airbrake
-revision | 38748467ea579e7ae64f7815452307c9d05e05c5
-version | v2.0
-
-### Response
-
-The API returns `201 Created` status code on success.
-
-## List deploys v4
-
-The API returns list of project deploys. See [Pagination](#pagination) section for supported query parameters and response fields.
-
-```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=USER_KEY"
+let api = kittn.authorize('meowmeowmeow');
+let kittens = api.kittens.get();
 ```
+
+> The above command returns JSON structured like this:
 
 ```json
 {
@@ -890,23 +880,14 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/notice-status/NOTICE_ID?key
 }
 ```
 
-### Response
+```javascript
+const kittn = require('kittn');
 
-The API returns `200 OK` status code on success and JSON data.
-
-Field | Comment
------ | -------
-code | `processed`, `rejected`, `archived` or `not_found`.
-message | `message` explains `code` in human readable format.
-groupId | `groupId` contains notice group id if notice is processed.
-
-## List versions v4
-
-The API returns list of notice versions. See [Pagination](#pagination) section for supported query parameters and response fields.
-
-```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/versions?key=USER_KEY"
+let api = kittn.authorize('meowmeowmeow');
+let max = api.kittens.get(2);
 ```
+
+> The above command returns JSON structured like this:
 
 ```json
 {
