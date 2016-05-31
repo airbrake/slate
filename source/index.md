@@ -651,6 +651,20 @@ curl -X PUT "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/unmu
 
 The API returns `204 No Content` status code on success.
 
+## Delete group v4
+
+The API permanently deletes group.
+
+<aside class="warning">This operation can not be undone. Use it with care.</aside>
+
+```shell
+curl -X DELETE "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KEY"
+```
+
+### HTTP request
+
+`DELETE https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KEY`
+
 ## List group environments v4
 
 The API returns list of group environments. See [Pagination](#pagination) section for supported query parameters and response fields.
@@ -850,19 +864,6 @@ version | | Filters notices by version, e.g. `version=1.0`.
 
 The API returns `200 OK` status code on success.
 
-## Delete notice v4
-
-The API permanently deletes notice.
-
-<aside class="warning">This operation can not be undone. Use it with care.</aside>
-
-```shell
-curl -X DELETE "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/notices/NOTICE_ID?key=USER_KEY"
-```
-
-### HTTP request
-
-`DELETE https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/notices/NOTICE_ID?key=USER_KEY`
 
 ### Response
 
