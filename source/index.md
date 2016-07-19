@@ -5,7 +5,7 @@ language_tabs:
   - shell
 
 toc_footers:
-  - <a href="://airbrake.io">Airbrake.io</a>
+  - <a href="https://airbrake.io">Airbrake.io</a>
 
 search: true
 ---
