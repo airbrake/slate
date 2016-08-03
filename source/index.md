@@ -234,18 +234,18 @@ curl -X POST -H "Content-Type: application/json" -d JSON "https://airbrake.io/ap
 Field | Required | Description
 ------|----------|------------
 errors | true | An array of objects describing the error that occurred.
-errors/{i}/type | true | The class name or type of error that occurred.
+errors/{i}/type | false | The class name or type of error that occurred.
 errors/{i}/message | false | A short message describing the error that occurred.
-errors/{i}/backtrace | true | An array of objects describing each line of the error's backtrace.
-errors/{i}/backtrace/{i}/file | true | The full path of the file in this entry of the backtrace.
+errors/{i}/backtrace | false | An array of objects describing each line of the error's backtrace.
+errors/{i}/backtrace/{i}/file | false | The full path of the file in this entry of the backtrace.
 errors/{i}/backtrace/{i}/line | false | The file's line number in this entry of the backtrace.
 errors/{i}/backtrace/{i}/column | false | The line's column number in this entry of the backtrace.
 errors/{i}/backtrace/{i}/function | false | When available, the function or method name in this entry of the backtrace.
 context | false | An object describing additional context for this error.
-context/notifier | true | An object describing the notifier client library.
-context/notifier/name | true | The name of the notifier client submitting the request, e.g. "airbrake-js".
-context/notifier/version | true | The version number of the notifier client submitting the request, e.g. "1.2.3".
-context/notifier/url | true | A URL at which more information can be obtained concerning the notifier client.
+context/notifier | false | An object describing the notifier client library.
+context/notifier/name | false | The name of the notifier client submitting the request, e.g. "airbrake-js".
+context/notifier/version | false | The version number of the notifier client submitting the request, e.g. "1.2.3".
+context/notifier/url | false | A URL at which more information can be obtained concerning the notifier client.
 context/environment | false | The name of the server environment in which the error occurred, e.g. "staging", "production", etc.
 context/component | false | The component or module in which the error occurred. In MVC frameworks like Rails, this should be set to the controller. Otherwise, this can be set to a route or other request category.
 context/action | false | The action in which the error occurred. If each request is routed to a controller action, this should be set here. Otherwise, this can be set to a method or other request subcategory.
@@ -274,12 +274,12 @@ The JSON POST data schema for the v3 notifier API.
   "properties": {
     "notifier": {
       "type": "object",
-      "required": true,
+      "required": false,
       "additionalProperties": false,
       "properties": {
-        "name": {"type": "string", "required": true},
-        "version": {"type": "string", "required": true},
-        "url": {"type": "string", "required": true}
+        "name": {"type": "string", "required": false},
+        "version": {"type": "string", "required": false},
+        "url": {"type": "string", "required": false}
       }
     },
     "errors": {
@@ -289,19 +289,19 @@ The JSON POST data schema for the v3 notifier API.
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "type": {"type": "string", "required": true},
-          "message": {"type": "string", "required": true},
+          "type": {"type": "string", "required": false},
+          "message": {"type": "string", "required": false},
           "backtrace": {
             "type": "array",
-            "required": true,
+            "required": false,
             "items": {
               "type": "object",
               "additionalProperties": false,
               "properties": {
-                "file": {"type": "string", "required": true},
-                "function": {"type": "string", "required": true},
-                "line": {"type": "number", "required": true},
-                "column": {"type": "number", "required": true}
+                "file": {"type": "string", "required": false},
+                "function": {"type": "string", "required": false},
+                "line": {"type": "number", "required": false},
+                "column": {"type": "number", "required": false}
               }
             }
           }
