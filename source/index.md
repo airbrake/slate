@@ -311,6 +311,7 @@ The JSON POST data schema for the v3 notifier API.
         "url": {"type": "string"},
         "userAgent": {"type": "string"},
         "rootDirectory": {"type": "string"},
+        "hostname": {"type": "string"},
         "notifier": {
           "type": "object",
           "required": false,
