@@ -272,16 +272,6 @@ The JSON POST data schema for the v3 notifier API.
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "notifier": {
-      "type": "object",
-      "required": false,
-      "additionalProperties": false,
-      "properties": {
-        "name": {"type": "string", "required": false},
-        "version": {"type": "string", "required": false},
-        "url": {"type": "string", "required": false}
-      }
-    },
     "errors": {
       "type": "array",
       "required": true,
@@ -321,8 +311,19 @@ The JSON POST data schema for the v3 notifier API.
         "url": {"type": "string"},
         "userAgent": {"type": "string"},
         "rootDirectory": {"type": "string"},
+        "hostname": {"type": "string"},
+        "notifier": {
+          "type": "object",
+          "required": false,
+          "additionalProperties": false,
+          "properties": {
+            "name": {"type": "string", "required": false},
+            "version": {"type": "string", "required": false},
+            "url": {"type": "string", "required": false}
+          }
+        }
         "user": {
-          "type: "object",
+          "type": "object",
           "required": false,
           "additionalProperties": false,
           "properties": {
