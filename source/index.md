@@ -321,7 +321,7 @@ The JSON POST data schema for the v3 notifier API.
             "version": {"type": "string", "required": false},
             "url": {"type": "string", "required": false}
           }
-        }
+        },
         "user": {
           "type": "object",
           "required": false,
