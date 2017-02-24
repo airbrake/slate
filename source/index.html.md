@@ -5,8 +5,7 @@ language_tabs:
   - shell
   - ruby
   - python
-  - javascript--browser: Browser!
-  - javascript--node: Node!
+  - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -172,14 +171,10 @@ See [POST Data Fields](#post-data-fields-v3) &
 curl -X POST -H "Content-Type: application/json" -d JSON "https://airbrake.io/api/v3/projects/PROJECT_ID/notices?key=PROJECT_KEY"
 ```
 
-```javascript--browser
+```javascript
 const kittn = require('kittn');
 
 let api = kittn.authorize('meowmeowmeow');
-```
-
-```javascript--node
-// node code here!
 ```
 
 > Make sure to replace `meowmeowmeow` with your API key.
@@ -455,15 +450,11 @@ The API returns `200 OK` status code on success.
 curl -X POST -H "Content-Type: application/json" -d '{"environment":"production","username":"john","repository":"https://github.com/airbrake/airbrake","revision":"38748467ea579e7ae64f7815452307c9d05e05c5","version":"v2.0"}' "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=PROJECT_KEY"
 ```
 
-```javascript--browser
+```javascript
 const kittn = require('kittn');
 
 let api = kittn.authorize('meowmeowmeow');
 let kittens = api.kittens.get();
-```
-
-```javascript--node
-// node code here!
 ```
 
 > The above command returns JSON structured like this:
@@ -889,15 +880,11 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/notice-status/NOTICE_ID?key
 }
 ```
 
-```javascript--browser
+```javascript
 const kittn = require('kittn');
 
 let api = kittn.authorize('meowmeowmeow');
 let max = api.kittens.get(2);
-```
-
-```javascript--node
-// node code here!
 ```
 
 > The above command returns JSON structured like this:
