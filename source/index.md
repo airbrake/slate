@@ -202,6 +202,7 @@ curl -X POST -H "Content-Type: application/json" -d JSON "https://airbrake.io/ap
     "hostname": "production-rails-server-1",
     "language": "Ruby 2.1.1",
     "environment": "production",
+    "severity": "error",
 
     "version": "1.1.1",
     "url:": "http://some-site.com/example",
@@ -247,6 +248,7 @@ context/notifier/name | false | The name of the notifier client submitting the r
 context/notifier/version | false | The version number of the notifier client submitting the request, e.g. "1.2.3".
 context/notifier/url | false | A URL at which more information can be obtained concerning the notifier client.
 context/environment | false | The name of the server environment in which the error occurred, e.g. "staging", "production", etc.
+context/severity | false | How severe the error that occurred. Allowed values: `debug`, `info`, `notice`, `warning`, `error`, `critical`, `alert`, `emergency`, `invalid`.
 context/component | false | The component or module in which the error occurred. In MVC frameworks like Rails, this should be set to the controller. Otherwise, this can be set to a route or other request category.
 context/action | false | The action in which the error occurred. If each request is routed to a controller action, this should be set here. Otherwise, this can be set to a method or other request subcategory.
 context/os | false | Details of the operating system on which the error occurred.
@@ -307,6 +309,8 @@ The JSON POST data schema for the v3 notifier API.
         "action": {"type": "string"},
         "os": {"type": "string"},
         "language": {"type": "string"},
+        "environment": {"type": "string"},
+        "severity": {"type": "string"},
         "version": {"type": "string"},
         "url": {"type": "string"},
         "userAgent": {"type": "string"},
