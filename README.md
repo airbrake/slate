@@ -1,3 +1,9 @@
+Airbrake deployment
+========
+We use ansible to deploy slate. :cow: :speech_balloon: Please use the
+[Deploy slate](https://github.com/airbrake/ansible/wiki/Deploy-slate) ansible
+doc.
+
 Slate
 ========
 
