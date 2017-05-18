@@ -1,9 +1,6 @@
 ---
 title: Airbrake API Reference
 
-language_tabs:
-  - shell
-
 toc_footers:
   - <a href="https://airbrake.io">Airbrake.io</a>
 
