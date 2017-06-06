@@ -254,6 +254,8 @@ context/language | false | Describe the language on which the error occurred, e.
 context/version | false | Describe the application version, e.g. "v1.2.3".
 context/url | false | The application's URL.
 context/userAgent | false | The requesting browser's full user-agent string.
+context/userAddr | false | The IP address of the user that triggered the notice.
+context/remoteAddr | false | The IP address of the server that reported the notice.
 context/rootDirectory | false | The application's root directory path.
 context/user/id | false | If applicable, the current user's ID.
 context/user/name | false | If applicable, the current user's username.
@@ -311,6 +313,8 @@ The JSON POST data schema for the v3 notifier API.
         "version": {"type": "string"},
         "url": {"type": "string"},
         "userAgent": {"type": "string"},
+        "userAddr": {"type": "string"},
+        "remoteAddr": {"type": "string"},
         "rootDirectory": {"type": "string"},
         "hostname": {"type": "string"},
         "notifier": {
