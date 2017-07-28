@@ -571,9 +571,6 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups?key=USER_KEY"
 Parameter | Default | Description
 --------- | ------- | -----------
 deploy_id | | Filters groups by deploy id.
-environment | | Filters groups by environment.
-component | | Filters groups by component.
-action | | Filters groups by action.
 archived | | When set to `true` returns archived groups.
 muted | | When set to `true` returns muted groups.
 start_time | | Returns groups created after `start_time`.
@@ -677,114 +674,6 @@ curl -X DELETE "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?k
 ### HTTP request
 
 `DELETE https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KEY`
-
-## List group environments v4
-
-The API returns list of group environments. See [Pagination](#pagination) section for supported query parameters and response fields.
-
-```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/environments?key=USER_KEY"
-```
-
-```json
-{
-  "environments": [
-    {
-      "environment": "production",
-      "projectId": 1,
-      "noticeTotalCount": 1
-    }
-  ],
-  "count": 1,
-  "page": 1
-}
-```
-
-### HTTP request
-
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/environments?key=USER_KEY`
-
-### Query parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-environment | | Searches for similar environments.
-
-### Response
-
-The API returns `200 OK` status code on success.
-
-## List group components v4
-
-The API returns list of group components. See [Pagination](#pagination) section for supported query parameters and response fields.
-
-```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/components?key=USER_KEY"
-```
-
-```json
-{
-  "components": [
-    {
-      "component": "projects",
-      "projectId": 1,
-      "noticeTotalCount": 1
-    }
-  ],
-  "count": 1,
-  "page": 1
-}
-```
-
-### HTTP request
-
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/components?key=USER_KEY`
-
-### Query parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-component | | Searches for similar components.
-
-### Response
-
-The API returns `200 OK` status code on success.
-
-## List group actions v4
-
-The API returns list of group actions. See [Pagination](#pagination) section for supported query parameters and response fields.
-
-```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/actions?key=USER_KEY"
-```
-
-```json
-{
-  "actions": [
-    {
-      "action": "show",
-      "projectId": 1,
-      "noticeTotalCount": 1
-    }
-  ],
-  "count": 1,
-  "page": 1
-}
-```
-
-### HTTP request
-
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/actions?key=USER_KEY`
-
-### Query parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-action | | Searches for similar actions.
-
-### Response
-
-The API returns `200 OK` status code on success.
 
 ## List groups across all projects v4
 
