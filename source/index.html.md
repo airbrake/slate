@@ -353,7 +353,7 @@ On success, the API returns a `201 Created` status with the following JSON data.
 
 Field | Comment
 ----- | -------
-id | The ID of the newly created error notice. This can be used to [query the status of this error notice](#show-notice-status-v4).
+id | The UUID of the newly created error notice. This can be used to [query the status of this error notice](#show-notice-status-v4).
 url | A URL that will take you to the error on the Airbrake dashboard.
 
 **Note**: a success response means that the data has been received and accepted
@@ -780,8 +780,16 @@ The API returns notice status:
 - `archived` - notice is archived according to the project retention limit.
 - `not_found` - notice does not exist or is being processed by Airbrake.
 
+
+### HTTP request
+
+Note that `NOTICE_UUID` is returned by [error notification API v3](#create-notice-v3).
+
+`curl "https://airbrake.io/api/v4/projects/PROJECT_ID/notice-status/NOTICE_UUID?key=USER_KEY"`
+
+
 ```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/notice-status/NOTICE_ID?key=USER_KEY"
+curl "https://airbrake.io/api/v4/projects/PROJECT_ID/notice-status/NOTICE_UUID?key=USER_KEY"
 ```
 
 ```json
