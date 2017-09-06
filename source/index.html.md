@@ -798,7 +798,6 @@ The API returns `200 OK` status code on success and JSON data.
 Field | Comment
 ----- | -------
 code | `processed`, `rejected`, `archived` or `not_found`.
-message | `message` explains `code` in human readable format.
 groupId | `groupId` contains notice group id if notice is processed.
 
 ## List versions v4
