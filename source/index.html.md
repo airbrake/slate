@@ -808,44 +808,6 @@ Field | Comment
 code | `processed`, `rejected`, `archived` or `not_found`.
 groupId | `groupId` contains notice group id if notice is processed.
 
-## List versions v4
-
-The API returns list of notice versions. See [Pagination](#pagination) section for supported query parameters and response fields.
-
-```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/versions?key=USER_KEY"
-```
-
-```json
-{
-  "versions": [
-    {
-      "version": "1.0",
-      "groupId": "1",
-      "noticeTotalCount": 10,
-      "createdAt": "2014-09-26T17:37:33.638348Z",
-      "updatedAt": "2014-09-26T17:37:33.638348Z"
-    },
-    {
-      "version": "1.1",
-      "groupId": "1",
-      "noticeTotalCount": 20,
-      "createdAt": "2014-09-26T17:37:33.638348Z",
-      "updatedAt": "2014-09-26T17:37:33.638348Z"
-    }
-  ],
-  "count": 2
-}
-```
-
-### HTTP request
-
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/versions?key=USER_KEY`
-
-### Response
-
-The API returns `200 OK` status code on success.
-
 # Project activities v4
 
 The API returns list of project activities. See [Pagination](#pagination) section for supported query parameters and response fields.
