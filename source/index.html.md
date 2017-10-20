@@ -173,7 +173,11 @@ curl -X POST -H "Content-Type: application/json" -d JSON "https://airbrake.io/ap
         {
           "file": "backtrace file",
           "line": 10,
-          "function": "backtrace function"
+          "function": "backtrace function",
+          "code": {
+            "1": "code",
+            "2": "more code"
+          }
         }
       ]
     },
@@ -239,6 +243,7 @@ errors/{i}/backtrace/{i}/file | false | The full path of the file in this entry 
 errors/{i}/backtrace/{i}/line | false | The file's line number in this entry of the backtrace.
 errors/{i}/backtrace/{i}/column | false | The line's column number in this entry of the backtrace.
 errors/{i}/backtrace/{i}/function | false | When available, the function or method name in this entry of the backtrace.
+errors/{i}/backtrace/{i}/code | false | Current line of code plus a few lines around.
 context | false | An object describing additional context for this error.
 context/notifier | false | An object describing the notifier client library.
 context/notifier/name | false | The name of the notifier client submitting the request, e.g. "airbrake-js".
@@ -292,7 +297,8 @@ The JSON POST data schema for the v3 notifier API.
                 "file": {"type": "string", "required": false},
                 "function": {"type": "string", "required": false},
                 "line": {"type": "number", "required": false},
-                "column": {"type": "number", "required": false}
+                "column": {"type": "number", "required": false},
+                "code": {"type": "object", "required": false}
               }
             }
           }
