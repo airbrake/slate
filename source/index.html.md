@@ -441,7 +441,7 @@ The API returns `200 OK` status code on success.
 ## Create deploy v4
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -d '{"environment":"production","username":"john","repository":"https://github.com/airbrake/airbrake","revision":"38748467ea579e7ae64f7815452307c9d05e05c5","version":"v2.0"}' "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=PROJECT_KEY"
+curl -X POST -H "Content-Type: application/json" -d '{"environment":"production","username":"john","email":"john@smith.com","repository":"https://github.com/airbrake/airbrake","revision":"38748467ea579e7ae64f7815452307c9d05e05c5","version":"v2.0"}' "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=PROJECT_KEY"
 ```
 
 ### HTTP request
@@ -456,6 +456,7 @@ Key | Example
 --- | -------
 environment | production
 username | john
+email | john@smith.com
 repository | https://github.com/airbrake/airbrake
 revision | 38748467ea579e7ae64f7815452307c9d05e05c5
 version | v2.0
@@ -478,6 +479,8 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=USER_KEY"
     {
       "environment": "production",
       "username": "john",
+      "email": "john@smith.com",
+      "gravatarId": "767fc9c115a1b989744c755db47feb60",
       "repository": "https://github.com/airbrake/airbrake",
       "revision": "38748467ea579e7ae64f7815452307c9d05e05c5",
       "version": "v2.0"
@@ -506,6 +509,8 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys/DEPLOY_ID?key=USER_
   "deploy": {
     "environment": "production",
     "username": "john",
+    "username": "john",
+    "email": "john@smith.com",
     "repository": "https://github.com/airbrake/airbrake",
     "revision": "38748467ea579e7ae64f7815452307c9d05e05c5",
     "version": "v2.0"
