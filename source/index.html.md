@@ -509,7 +509,6 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys/DEPLOY_ID?key=USER_
   "deploy": {
     "environment": "production",
     "username": "john",
-    "username": "john",
     "email": "john@smith.com",
     "repository": "https://github.com/airbrake/airbrake",
     "revision": "38748467ea579e7ae64f7815452307c9d05e05c5",
