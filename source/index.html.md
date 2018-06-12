@@ -741,6 +741,41 @@ curl "https://airbrake.io/api/v4/groups?key=USER_KEY"
 
 The API returns `200 OK` status code on success.
 
+## Show group statistics
+
+The API returns statistics for the group.
+
+```shell
+curl "https://airbrake.io/api/v4/groups/GROUP_ID/stats?key=USER_KEY"
+```
+
+```json
+{
+  "projectId": PROJECT_ID,
+  "groupId": GROUP_ID,
+  "accepted": [904, 2013],
+  "limited": [6784, 4245],
+  "time": ["2018-06-12T09:00:00Z", "2018-06-12T10:00:00Z"]
+}
+```
+
+### HTTP request
+
+`GET https://airbrake.io/api/v4/groups/GROUP_ID/stats?key=USER_KEY`
+
+### Query parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+period | 1h | Aggregates results for the period. Supported periods are: 1m, 5m, 15m, 30m, 2h, 3h, 6h, 12h, and 24h.
+time__gte | | Filters results by `time >= VALUE`.
+time__lt | | Filters results by `time < VALUE`.
+limit | 100 | Limits number of results.
+
+### Response
+
+The API returns `200 OK` status code on success.
+
 # Notices v4
 
 ## List notices v4
