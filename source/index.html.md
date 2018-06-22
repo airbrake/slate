@@ -746,7 +746,7 @@ The API returns `200 OK` status code on success.
 The API returns statistics for the group.
 
 ```shell
-curl "https://airbrake.io/api/v4/groups/GROUP_ID/stats?key=USER_KEY"
+curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/stats?key=USER_KEY"
 ```
 
 ```json
@@ -761,7 +761,7 @@ curl "https://airbrake.io/api/v4/groups/GROUP_ID/stats?key=USER_KEY"
 
 ### HTTP request
 
-`GET https://airbrake.io/api/v4/groups/GROUP_ID/stats?key=USER_KEY`
+`GET https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/stats?key=USER_KEY`
 
 ### Query parameters
 
@@ -899,6 +899,41 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/activities?key=USER_KEY"
 ### HTTP request
 
 `GET https://airbrake.io/api/v4/projects/PROJECT_ID/activities?key=USER_KEY`
+
+### Response
+
+The API returns `200 OK` status code on success.
+
+## Show project statistics
+
+The API returns statistics for the project.
+
+```shell
+curl "https://airbrake.io/api/v4/projects/PROJECT_ID/stats?key=USER_KEY"
+```
+
+```json
+{
+  "projectId": PROJECT_ID,
+  "accepted": [904, 2013],
+  "limited": [0, 0],
+  "overQuota": [0, 0],
+  "time": ["2018-06-12T09:00:00Z", "2018-06-12T10:00:00Z"]
+}
+```
+
+### HTTP request
+
+`GET https://airbrake.io/api/v4/projects/PROJECT_ID/stats?key=USER_KEY`
+
+### Query parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+period | 1h | Aggregates results for the period. Supported periods are: 1m, 5m, 15m, 30m, 2h, 3h, 6h, 12h, and 24h.
+time__gte | | Filters results by `time >= VALUE`.
+time__lt | | Filters results by `time < VALUE`.
+limit | 100 | Limits number of results.
 
 ### Response
 
