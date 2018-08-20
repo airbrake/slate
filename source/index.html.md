@@ -18,7 +18,7 @@ curl "api_endpoint_here?key=(PROJECT_KEY|USER_KEY)"
 Airbrake uses API keys to restrict access to the API. There are several kinds of keys:
 
 - Project API key (`PROJECT_KEY`) that is used to submit errors and track deploys. This key is what you configure the notifier agent in your app to use.
-- User API key (`USER_KEY`) is used to access to the project data through Airbrake APIs. Each user of a project has their own key.
+- User API key (`USER_KEY`) is used to access to the project data through Airbrake APIs. Each Airbrake user has their own key.
 - User token (`USER_TOKEN`) that is identical to `USER_KEY`, but is valid for limited time.
 
 Airbrake expects the API key to be included in all API requests to our servers in a query string that looks like the following:
@@ -767,9 +767,8 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/stats?key=U
 
 Parameter | Default | Description
 --------- | ------- | -----------
-period | 1h | Aggregates results for the period. Supported periods are: 1m, 5m, 15m, 30m, 2h, 3h, 6h, 12h, and 24h.
+period |  | Aggregates results for the period. Common periods are: 1m, 5m, 15m, 30m, 2h, 3h, 6h, 12h, and 24h.
 time__gte | | Filters results by `time >= VALUE`.
-time__lt | | Filters results by `time < VALUE`.
 limit | 100 | Limits number of results.
 
 ### Response
@@ -930,9 +929,8 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/stats?key=USER_KEY"
 
 Parameter | Default | Description
 --------- | ------- | -----------
-period | 1h | Aggregates results for the period. Supported periods are: 1m, 5m, 15m, 30m, 2h, 3h, 6h, 12h, and 24h.
+period |  | Aggregates results for the period. Common periods are: 1m, 5m, 15m, 30m, 2h, 3h, 6h, 12h, and 24h.p
 time__gte | | Filters results by `time >= VALUE`.
-time__lt | | Filters results by `time < VALUE`.
 limit | 100 | Limits number of results.
 
 ### Response
