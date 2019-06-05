@@ -1,11 +1,16 @@
 sudo: false
-
 language: ruby
 
 rvm:
-  - 2.2.5
-  - 2.3.3
-  - 2.4.0
+  - 2.5.5
 
-cache: bundler
-script: bundle exec middleman build
+cache: false
+
+before_install:
+  - gem install bundler -v 1.17.3 --no-document
+
+install:
+  - bundle install
+
+script:
+  - bundle exec middleman build
