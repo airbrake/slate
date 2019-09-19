@@ -140,6 +140,60 @@ collectionName | `projects` | Each API has different collection name. Some APIs 
 start | abcdefg | Position of the first element in the result set.
 end | abcdefg | Position of the last element in the result set.
 
+# Performance Monitoring
+
+## Route performance endpoint
+
+With this endpoint you can report performance data for the routes in your
+application, the data will then become available in your project's [Performance
+Monitoring dashboard](https://airbrake.io/docs/performance-monitoring/performance-dashboard-features/).
+
+**PUT data**
+
+The API expects JSON data to be sent with this request. Your `PROJECT_ID` and
+`PROJECT_KEY` are required to authenticate and report performance data.
+
+> **PUT /api/v5/projects/PROJECT_ID/routes-stats**
+
+```shell
+curl -X PUT -H "Content-Type: application/json" \
+"https://api.airbrake.io/api/v5/projects/PROJECT_ID/routes-stats?key=PROJECT_KEY" \
+-d '{
+  "environment": "production",
+  "routes": [
+    {
+      "method": "GET",
+      "route": "/drinks/:drink_id",
+      "statusCode": 200,
+      "time": "2019-09-19T18:00:00+00:00",
+      "count": 1,
+      "sum": 50.0,
+      "sumsq": 2500.0,
+      "tdigest": "AAAAAkA0AAAAAAAAAAAAAUdqYAAB"
+    }
+  ]
+}'
+```
+
+Field | Required | type |Description
+------|----------|----|--------
+environment | false | String |This is the environment the route stat was reported from
+routes[] | true | Array | An array of route objects describing their performance
+routes/{i}/route | true | String | The path describing your route e.g.  `'/drinks/:drink_id'`
+routes/{i}/method | true | String |The HTTP method as a string: `'GET'`, `'POST'`, `'PUT'`, ...
+routes/{i}/statusCode | true | Integer | The response code returned: `201`, `301`, `404`, `500`, ...
+routes/{i}/count | true | Integer | The number of requests to this route
+routes/{i}/time | true | String | The UTC time of the route activity to the minute, in [RFC3339 format](https://tools.ietf.org/html/rfc3339) `'2019-09-19T18:00:00+00:00'`
+routes/{i}/sum | true | Float | Your route's response time in miliseconds
+routes/{i}/sumsq | true | Float | The sum above squared
+routes/{i}/tdigest | true | String | This value holds the routes percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
+
+### Responses
+
+A successful `PUT` to this endpoint returns a `204` No Content.  If any
+required fields are missing the `PUT` fails and returns a `400` Bad Request and
+the message in the response will state which key is missing.
+
 # Error notification v3
 
 ## Create notice v3
