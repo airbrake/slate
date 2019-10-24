@@ -835,7 +835,7 @@ The API returns `200 OK` status code on success.
 # Notices v4
 
 > **Note:**
-> Notices are also known as "error occurrences" in the web app UI.
+> Notices are also known as "occurrences" in the web app.
 
 ## List notices v4
 
