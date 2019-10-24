@@ -584,6 +584,10 @@ The API returns `200 OK` status code.
 
 # Groups v4
 
+<aside class="notice">
+Groups are also known as "errors" in the web app.
+</aside>
+
 ## List groups v4
 
 The API returns list of groups. See [Pagination](#pagination) section for supported query parameters and response fields.
@@ -830,6 +834,10 @@ limit | 100 | Limits number of results.
 The API returns `200 OK` status code on success.
 
 # Notices v4
+
+<aside class="notice">
+Notices are also known as "occurrences" in the web app.
+</aside>
 
 ## List notices v4
 
