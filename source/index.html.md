@@ -584,8 +584,9 @@ The API returns `200 OK` status code.
 
 # Groups v4
 
-> **Note:**
-> Groups are also known as "errors" in the web app.
+<aside class="notice">
+Groups are also known as "errors" in the web app.
+</aside>
 
 ## List groups v4
 
@@ -834,8 +835,9 @@ The API returns `200 OK` status code on success.
 
 # Notices v4
 
-> **Note:**
-> Notices are also known as "occurrences" in the web app.
+<aside class="notice">
+Notices are also known as "occurrences" in the web app.
+</aside>
 
 ## List notices v4
 
