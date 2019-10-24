@@ -585,7 +585,7 @@ The API returns `200 OK` status code.
 # Groups v4
 
 > **Note:**
-> Groups are also known as "error groups" in the web app UI.
+> Groups are also known as "errors" in the web app.
 
 ## List groups v4
 
