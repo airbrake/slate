@@ -269,7 +269,8 @@ curl -X POST -H "Content-Type: application/json" -d JSON "https://airbrake.io/ap
       "email": "root@root.com"
     },
 
-    "route": "/pricing"
+    "route": "/pricing",
+    "httpMethod": "POST"
   },
   "environment": {
     "PORT": "443",
@@ -322,6 +323,7 @@ context/user/id | false | If applicable, the current user's ID.
 context/user/name | false | If applicable, the current user's username.
 context/user/email | false | If applicable, the current user's email address.
 context/route | false | Application route that triggered this error.
+context/httpMethod | false | HTTP method that was used to call "context/route"
 environment | false | An object containing the current environment variables. Where the key is the variable name, e.g. `{ "PORT": "443", "CODE_NAME": "gorilla" }`.
 session | false | An object containing the current session variables. Where the key is the variable name, e.g. `{ "basket_total": "1234", "user_id": "123" }`.
 params | false | An object containing the request parameters. Where the key is the parameter name, e.g. `{ "page": "3", "sort": "desc" }`.
