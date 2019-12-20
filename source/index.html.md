@@ -194,6 +194,82 @@ A successful `PUT` to this endpoint returns a `204` No Content.  If any
 required fields are missing the `PUT` fails and returns a `400` Bad Request and
 the message in the response will state which key is missing.
 
+## Routes breakdown endpoint
+
+The routes breakdown endpoint accepts the data that details how much time a
+request spent in each subtask such as DB querying, view rendering, cache writes
+and reads, and more. The data will then become available in each [route's detail view](https://airbrake.io/docs/performance-monitoring/performance-dashboard-features/#detailed-route-performance).
+
+**PUT data**
+
+The API expects JSON data to be sent with this request. Your `PROJECT_ID` and
+`PROJECT_KEY` are required to authenticate and report breakdown data.
+
+> **PUT /api/v5/projects/PROJECT_ID/routes-breakdowns**
+
+```shell
+curl -X PUT -H "Content-Type: application/json" \
+"https://api.airbrake.io/api/v5/projects/PROJECT_ID/routes-breakdowns?key=PROJECT_KEY" \
+-d '{
+  "environment": "production",
+  "routes": [
+    {
+      "route": "/drinks/:drink_id",
+      "method": "GET",
+      "responseType": "json",
+      "count": 1,
+      "sum": 50.0,
+      "sumsq": 2500.0,
+      "tdigest": "AAAAAkA0AAAAAAAAAAAAAUdqYAAB",
+      "time": "2019-09-19T18:00:00+00:00",
+      "groups": [
+        {
+          "db": {
+            "count": 1,
+            "sum": 10.0,
+            "sumsq": 100.0,
+            "tdigest": "AAAAAkA0AAAAAAAAAAAAAUMDAAAB"
+          }
+        },
+        {
+          "view": {
+            "count": 1,
+            "sum": 40.0,
+            "sumsq": 160.0,
+            "tdigest": "AAAAAkA0AAAAAAAAAAAAAUPSgAAB"
+          }
+        {
+      ]
+    }
+  ]
+}'
+```
+
+Field | Required | type |Description
+------|----------|----|--------
+environment | false | String |This is the environment the route stat was reported from
+routes[] | true | Array | An array of route objects breaking down performance by part
+routes/{i}/route | true | String | The path describing your route e.g.  `'/drinks/:drink_id'`
+routes/{i}/method | true | String | The HTTP method as a string: `'GET'`, `'POST'`, `'PUT'`, ...
+routes/{i}/responseType | true | String | The type of response e.g. `JSON`, `HTML`, `XML`, ...
+routes/{i}/count | true | Integer | The number of requests to this route
+routes/{i}/sum | true | Float | The route response time in miliseconds
+routes/{i}/sumsq | true | Float | The `sum` above squared
+routes/{i}/tdigest | true | String | The routes percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
+routes/{i}/time | true | String | The UTC time of the route activity to the minute, in [RFC3339 format](https://tools.ietf.org/html/rfc3339) `'2019-09-19T18:00:00+00:00'`
+routes/{i}/groups[] | true | Array | An array of group objects describing each pieces performance
+routes/{i}/groups{i}/label | true | Object | Object with a label e.g. `database`, `view`, `cache`, `http`, ...
+routes/{i}/groups{i}/label/count | true | Integer | The number of requests for this group
+routes/{i}/groups{i}/label/sum | true | Float | The response time in miliseconds for this group
+routes/{i}/groups{i}/label/sumsq | true | Float | The sum above squared
+routes/{i}/groups{i}/label/tdigest | true | String | The group's percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
+
+### Responses
+
+A successful `PUT` to this endpoint returns a `204` No Content.  If any
+required fields are missing the `PUT` fails and returns a `400` Bad Request and
+the message in the response will state which key is missing.
+
 # Error notification v3
 
 ## Create notice v3
