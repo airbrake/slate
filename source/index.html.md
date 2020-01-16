@@ -184,7 +184,7 @@ routes/{i}/method | true | String |The HTTP method as a string: `'GET'`, `'POST'
 routes/{i}/statusCode | true | Integer | The response code returned: `201`, `301`, `404`, `500`, ...
 routes/{i}/count | true | Integer | The number of requests to this route
 routes/{i}/time | true | String | The UTC time of the route activity to the minute, in [RFC3339 format](https://tools.ietf.org/html/rfc3339) `'2019-09-19T18:00:00+00:00'`
-routes/{i}/sum | true | Float | Your route's response time in miliseconds
+routes/{i}/sum | true | Float | Your route's response time in milliseconds
 routes/{i}/sumsq | true | Float | The sum above squared
 routes/{i}/tdigest | true | String | This value holds the routes percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
 
@@ -253,20 +253,90 @@ routes/{i}/route | true | String | The path describing your route e.g.  `'/drink
 routes/{i}/method | true | String | The HTTP method as a string: `'GET'`, `'POST'`, `'PUT'`, ...
 routes/{i}/responseType | true | String | The type of response e.g. `JSON`, `HTML`, `XML`, ...
 routes/{i}/count | true | Integer | The number of requests to this route
-routes/{i}/sum | true | Float | The route response time in miliseconds
+routes/{i}/sum | true | Float | The route response time in milliseconds
 routes/{i}/sumsq | true | Float | The `sum` above squared
 routes/{i}/tdigest | true | String | The routes percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
 routes/{i}/time | true | String | The UTC time of the route activity to the minute, in [RFC3339 format](https://tools.ietf.org/html/rfc3339) `'2019-09-19T18:00:00+00:00'`
 routes/{i}/groups[] | true | Array | An array of group objects describing each pieces performance
 routes/{i}/groups{i}/label | true | Object | Object with a label e.g. `database`, `view`, `cache`, `http`, ...
 routes/{i}/groups{i}/label/count | true | Integer | The number of requests for this group
-routes/{i}/groups{i}/label/sum | true | Float | The response time in miliseconds for this group
+routes/{i}/groups{i}/label/sum | true | Float | The response time in milliseconds for this group
 routes/{i}/groups{i}/label/sumsq | true | Float | The sum above squared
 routes/{i}/groups{i}/label/tdigest | true | String | The group's percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
 
 ### Responses
 
 A successful `PUT` to this endpoint returns a `204` No Content.  If any
+required fields are missing the `PUT` fails and returns a `400` Bad Request and
+the message in the response will state which key is missing.
+
+## Database query stats
+
+The queries stats endpoint accepts data for [database query analysis](https://airbrake.io/blog/airbrake-feature/digging-deeper-into-databases). This
+is the most granular information detailing the time it took to complete each
+database query during a request. The data will then be usable in your project's
+queries dashboard and in each route's detail view.
+
+<aside class="notice">
+Be sure to normalize your SQL queries, removing any IDs, names, or any other
+sensitive information from each query. You should replace these values
+with question marks <code>?</code>. e.g.<br/>
+<code>
+Before: SELECT "users".* FROM "users" WHERE "users"."id" = 12</br>
+After: &nbsp;SELECT "users".* FROM "users" WHERE "users"."id" = ?
+</code>
+</aside>
+
+**PUT data**
+
+The API expects JSON data to be sent with this request. Your `PROJECT_ID` and
+`PROJECT_KEY` are required to authenticate and report breakdown data.
+
+> **PUT /api/v5/projects/PROJECT_ID/queries-stats**
+
+```shell
+curl -X PUT -H "Content-Type: application/json" \
+"https://api.airbrake.io/api/v5/projects/PROJECT_ID/queries-stats?key=PROJECT_KEY" \
+-d '{
+  "environment":"production",
+  "queries": [
+    {
+      "query":"SELECT * FROM things WHERE id = ?",
+      "route":"/foo",
+      "method":"GET",
+      "function":"foo",
+      "file":"foo.rb",
+      "line":123,
+      "count":1,
+      "sum":60000.0,
+      "sumsq":3600000000.0,
+      "tdigest":"AAAAAkA0AAAAAAAAAAAAAUdqYAAB",
+      "time":"2020-01-16T00:00:00+00:00"
+    }
+  ]
+}'
+```
+
+Field | Required | type |Description
+------|----------|----|--------
+environment | true | String | The environment the query stat was reported from
+queries[] | true | Array | An array of query objects detailing the performance of each
+queries/{i}/query | true | String | The normalized SQL query being executed. e.g. <br/>`"SELECT * FROM things WHERE things.id = ?"`
+queries/{i}/route | true | String | The route that triggered the query e.g.  `'/drinks/:drink_id'`
+queries/{i}/method | true | String | The HTTP method as a string: `'GET'`, `'POST'`, `'PUT'`, ...
+queries/{i}/function | true | String | The function or method that executed the query
+queries/{i}/file | true | String | The full path of the file containing the query
+queries/{i}/line | true | Integer | The file's line number where the query was executed
+queries/{i}/count | true | Integer | The number of requests to this query
+queries/{i}/sum | true | Float | The query response time in milliseconds
+queries/{i}/sumsq | true | Float | The `sum` above squared
+queries/{i}/tdigest | true | String | The query's percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
+queries/{i}/time | true | String | The UTC time of the query to the minute, in [RFC3339 format](https://tools.ietf.org/html/rfc3339) `'2019-09-19T18:00:00+00:00'`
+
+
+### Responses
+
+A successful `PUT` to this endpoint returns a `204` No Content. If any
 required fields are missing the `PUT` fails and returns a `400` Bad Request and
 the message in the response will state which key is missing.
 
