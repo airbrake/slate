@@ -270,6 +270,72 @@ A successful `PUT` to this endpoint returns a `204` No Content.  If any
 required fields are missing the `PUT` fails and returns a `400` Bad Request and
 the message in the response will state which key is missing.
 
+## Database query stats
+
+The queries stats endpoint accepts data for [database query analysis](https://airbrake.io/blog/airbrake-feature/digging-deeper-into-databases). This
+is the most granular information detailing the time it took to complete each
+database query during a request. The data will then be usable in your project's
+queries dashboard and in each route's detail view.
+
+<aside class="warning">
+Be sure to normalize your SQL queries, removing any IDs, names, or any other
+sensitive information from each query. You should replace these values
+with question marks "?".
+</aside>
+
+**PUT data**
+
+The API expects JSON data to be sent with this request. Your `PROJECT_ID` and
+`PROJECT_KEY` are required to authenticate and report breakdown data.
+
+> **PUT /api/v5/projects/PROJECT_ID/queries-stats**
+
+```shell
+curl -X PUT -H "Content-Type: application/json" \
+"https://api.airbrake.io/api/v5/projects/PROJECT_ID/queries-stats?key=PROJECT_KEY" \
+-d '{
+  "environment":"production",
+  "queries": [
+      {
+            "query":"SELECT * FROM things",
+            "route":"/foo",
+            "method":"GET",
+            "function":"foo",
+            "file":"foo.rb",
+            "line":123,
+            "count":1,
+            "sum":60000.0,
+            "sumsq":3600000000.0,
+            "tdigest":"AAAAAkA0AAAAAAAAAAAAAUdqYAAB",
+            "time":"2020-01-16T00:00:00+00:00"
+          }
+    ]
+}'
+```
+
+Field | Required | type |Description
+------|----------|----|--------
+environment | true | String | The environment the query stat was reported from
+queries[] | true | Array | An array of query objects detailing the performance of each
+queries/{i}/query | true | String | The normalized SQL query being executed. e.g. `"Select\s*\sFROM\sthings"`
+queries/{i}/route | true | String | The route that triggered the query e.g.  `'/drinks/:drink_id'`
+queries/{i}/method | true | String | The HTTP method as a string: `'GET'`, `'POST'`, `'PUT'`, ...
+queries/{i}/function | true | String | The function or method that executed the query
+queries/{i}/file | true | String | The full path of the file containing the query
+queries/{i}/line | true | Integer | The file's line number where the query was executed
+queries/{i}/count | true | Integer | The number of requests to this query
+queries/{i}/sum | true | Float | The query response time in miliseconds
+queries/{i}/sumsq | true | Float | The `sum` above squared
+queries/{i}/tdigest | true | String | The query's percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
+queries/{i}/time | true | String | The UTC time of the query to the minute, in [RFC3339 format](https://tools.ietf.org/html/rfc3339) `'2019-09-19T18:00:00+00:00'`
+
+
+### Responses
+
+A successful `PUT` to this endpoint returns a `204` No Content. If any
+required fields are missing the `PUT` fails and returns a `400` Bad Request and
+the message in the response will state which key is missing.
+
 # Error notification v3
 
 ## Create notice v3
