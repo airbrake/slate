@@ -184,7 +184,7 @@ routes/{i}/method | true | String |The HTTP method as a string: `'GET'`, `'POST'
 routes/{i}/statusCode | true | Integer | The response code returned: `201`, `301`, `404`, `500`, ...
 routes/{i}/count | true | Integer | The number of requests to this route
 routes/{i}/time | true | String | The UTC time of the route activity to the minute, in [RFC3339 format](https://tools.ietf.org/html/rfc3339) `'2019-09-19T18:00:00+00:00'`
-routes/{i}/sum | true | Float | Your route's response time in miliseconds
+routes/{i}/sum | true | Float | Your route's response time in milliseconds
 routes/{i}/sumsq | true | Float | The sum above squared
 routes/{i}/tdigest | true | String | This value holds the routes percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
 
@@ -253,14 +253,14 @@ routes/{i}/route | true | String | The path describing your route e.g.  `'/drink
 routes/{i}/method | true | String | The HTTP method as a string: `'GET'`, `'POST'`, `'PUT'`, ...
 routes/{i}/responseType | true | String | The type of response e.g. `JSON`, `HTML`, `XML`, ...
 routes/{i}/count | true | Integer | The number of requests to this route
-routes/{i}/sum | true | Float | The route response time in miliseconds
+routes/{i}/sum | true | Float | The route response time in milliseconds
 routes/{i}/sumsq | true | Float | The `sum` above squared
 routes/{i}/tdigest | true | String | The routes percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
 routes/{i}/time | true | String | The UTC time of the route activity to the minute, in [RFC3339 format](https://tools.ietf.org/html/rfc3339) `'2019-09-19T18:00:00+00:00'`
 routes/{i}/groups[] | true | Array | An array of group objects describing each pieces performance
 routes/{i}/groups{i}/label | true | Object | Object with a label e.g. `database`, `view`, `cache`, `http`, ...
 routes/{i}/groups{i}/label/count | true | Integer | The number of requests for this group
-routes/{i}/groups{i}/label/sum | true | Float | The response time in miliseconds for this group
+routes/{i}/groups{i}/label/sum | true | Float | The response time in milliseconds for this group
 routes/{i}/groups{i}/label/sumsq | true | Float | The sum above squared
 routes/{i}/groups{i}/label/tdigest | true | String | The group's percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
 
@@ -324,7 +324,7 @@ queries/{i}/function | true | String | The function or method that executed the 
 queries/{i}/file | true | String | The full path of the file containing the query
 queries/{i}/line | true | Integer | The file's line number where the query was executed
 queries/{i}/count | true | Integer | The number of requests to this query
-queries/{i}/sum | true | Float | The query response time in miliseconds
+queries/{i}/sum | true | Float | The query response time in milliseconds
 queries/{i}/sumsq | true | Float | The `sum` above squared
 queries/{i}/tdigest | true | String | The query's percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
 queries/{i}/time | true | String | The UTC time of the query to the minute, in [RFC3339 format](https://tools.ietf.org/html/rfc3339) `'2019-09-19T18:00:00+00:00'`
