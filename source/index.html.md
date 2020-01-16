@@ -277,10 +277,14 @@ is the most granular information detailing the time it took to complete each
 database query during a request. The data will then be usable in your project's
 queries dashboard and in each route's detail view.
 
-<aside class="warning">
+<aside class="notice">
 Be sure to normalize your SQL queries, removing any IDs, names, or any other
 sensitive information from each query. You should replace these values
-with question marks "?".
+with question marks <code>?</code>. e.g.<br/>
+<code>
+Before: SELECT "users".* FROM "users" WHERE "users"."id" = 12</br>
+After: &nbsp;SELECT "users".* FROM "users" WHERE "users"."id" = ?
+</code>
 </aside>
 
 **PUT data**
@@ -296,20 +300,20 @@ curl -X PUT -H "Content-Type: application/json" \
 -d '{
   "environment":"production",
   "queries": [
-      {
-            "query":"SELECT * FROM things",
-            "route":"/foo",
-            "method":"GET",
-            "function":"foo",
-            "file":"foo.rb",
-            "line":123,
-            "count":1,
-            "sum":60000.0,
-            "sumsq":3600000000.0,
-            "tdigest":"AAAAAkA0AAAAAAAAAAAAAUdqYAAB",
-            "time":"2020-01-16T00:00:00+00:00"
-          }
-    ]
+    {
+      "query":"SELECT * FROM things WHERE id = ?",
+      "route":"/foo",
+      "method":"GET",
+      "function":"foo",
+      "file":"foo.rb",
+      "line":123,
+      "count":1,
+      "sum":60000.0,
+      "sumsq":3600000000.0,
+      "tdigest":"AAAAAkA0AAAAAAAAAAAAAUdqYAAB",
+      "time":"2020-01-16T00:00:00+00:00"
+    }
+  ]
 }'
 ```
 
@@ -317,7 +321,7 @@ Field | Required | type |Description
 ------|----------|----|--------
 environment | true | String | The environment the query stat was reported from
 queries[] | true | Array | An array of query objects detailing the performance of each
-queries/{i}/query | true | String | The normalized SQL query being executed. e.g. `"Select\s*\sFROM\sthings"`
+queries/{i}/query | true | String | The normalized SQL query being executed. e.g. <br/>`"SELECT * FROM things WHERE things.id = ?"`
 queries/{i}/route | true | String | The route that triggered the query e.g.  `'/drinks/:drink_id'`
 queries/{i}/method | true | String | The HTTP method as a string: `'GET'`, `'POST'`, `'PUT'`, ...
 queries/{i}/function | true | String | The function or method that executed the query
