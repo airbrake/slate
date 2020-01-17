@@ -340,6 +340,78 @@ A successful `PUT` to this endpoint returns a `204` No Content. If any
 required fields are missing the `PUT` fails and returns a `400` Bad Request and
 the message in the response will state which key is missing.
 
+## Queue performance data
+
+The queue stats endpoint accepts the data detailing the performance of your
+background jobs, how much time each job took to complete. The groups object in
+each queue entry is where more granular information can be provided like time
+spent on DB queries, cache writes/reads, template rendering, external service
+requests, and any other heavy lifting your background worker performs.
+
+**PUT data**
+
+The API expects JSON data to be sent with this request. Your `PROJECT_ID` and
+`PROJECT_KEY` are required to authenticate and report breakdown data.
+
+> **PUT /api/v5/projects/PROJECT_ID/queues-stats**
+
+```shell
+curl -X PUT -H "Content-Type: application/json" \
+"https://airbrake.io/api/v5/projects/PROJECT_ID/queues-stats?key=PROJECT_KEY" \
+-d '{
+  "environment":"staging",
+  "queues":[
+    {
+      "queue":"EmailWorker",
+      "errorCount":100,
+      "time":"2020-01-16T00:49:00+00:00",
+      "count":1,
+      "sum":60000.0,
+      "sumsq":3600000000.0,
+      "tdigest":"AAAAAkA0AAAAAAAAAAAAAUdqYAAB",
+      "groups":{
+        "redis":{
+          "count":1,
+          "sum":131.0,
+          "sumsq":17161.0,
+          "tdigest":"AAAAAkA0AAAAAAAAAAAAAUMDAAAB"
+        },
+        "sql":{
+          "count":1,
+          "sum":421.0,
+          "sumsq":177241.0,
+          "tdigest":"AAAAAkA0AAAAAAAAAAAAAUPSgAAB"
+        }
+      }
+    }
+  ]
+}'
+```
+
+Field | Required | type |Description
+------|----------|----|--------
+environment | true | String |This is the environment the route stat was reported from
+queues[] | true | Array | An array of route objects breaking down performance by part
+queues/{i}/queue | true | String | The path describing your queue e.g.  `EmailWorker`
+queues/{i}/count | true | Integer | The number of jobs on the queue
+queues/{i}/errorCount | true | Integer | The number of jobs that failed
+queues/{i}/time | true | String | The UTC time of the queue activity to the minute, in [RFC3339 format](https://tools.ietf.org/html/rfc3339) `'2019-09-19T18:00:00+00:00'`
+queues/{i}/sum | true | Float | The time in milliseconds for the jobs to finish
+queues/{i}/sumsq | true | Float | The `sum` above squared
+queues/{i}/tdigest | true | String | The queues percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
+queues/{i}/groups | true | Object | An Object describing the performance of each subprocess
+queues/{i}/groups{i}/label | true | Object | Object with a label e.g. `database`, `view`, `cache`, `http`, ...
+queues/{i}/groups{i}/label/count | true | Integer | The number of requests for this group
+queues/{i}/groups{i}/label/sum | true | Float | The response time in milliseconds for this group
+queues/{i}/groups{i}/label/sumsq | true | Float | The sum above squared
+queues/{i}/groups{i}/label/tdigest | true | String | The group's percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
+
+### Responses
+
+A successful `PUT` to this endpoint returns a `204` No Content.  If any
+required fields are missing the `PUT` fails and returns a `400` Bad Request and
+the message in the response will state which key is missing.
+
 # Error notification v3
 
 ## Create notice v3
