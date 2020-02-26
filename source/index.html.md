@@ -77,15 +77,15 @@ Almost all list APIs support pagination if you need access to all items. By defa
 
 Get first page:
 
-`GET https://airbrake.io/api/v4/collectionName`
+`GET https://api.airbrake.io/api/v4/collectionName`
 
 Get second page:
 
-`GET https://airbrake.io/api/v4/collectionName?page=2`
+`GET https://api.airbrake.io/api/v4/collectionName?page=2`
 
 Ask for 100 items per page:
 
-`GET https://airbrake.io/api/v4/collectionName?limit=100`
+`GET https://api.airbrake.io/api/v4/collectionName?limit=100`
 
 ### Query parameters
 
@@ -118,11 +118,11 @@ Some list APIs use cursor-based pagination, that only allows to fetch next and p
 
 Get next page:
 
-`GET https://airbrake.io/api/v4/collectionName?start=END_CURSOR`
+`GET https://api.airbrake.io/api/v4/collectionName?start=END_CURSOR`
 
 Get previous page:
 
-`GET https://airbrake.io/api/v4/collectionName?end=START_CURSOR`
+`GET https://api.airbrake.io/api/v4/collectionName?end=START_CURSOR`
 
 ### Query parameters
 
@@ -355,10 +355,10 @@ See [POST Data Fields](#post-data-fields-v3) &
 
 ### HTTP request
 
-`POST https://airbrake.io/api/v3/projects/PROJECT_ID/notices?key=PROJECT_KEY`
+`POST https://api.airbrake.io/api/v3/projects/PROJECT_ID/notices?key=PROJECT_KEY`
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -d JSON "https://airbrake.io/api/v3/projects/PROJECT_ID/notices?key=PROJECT_KEY"
+curl -X POST -H "Content-Type: application/json" -d JSON "https://api.airbrake.io/api/v3/projects/PROJECT_ID/notices?key=PROJECT_KEY"
 ```
 
 > Example JSON for the above request:
@@ -583,7 +583,7 @@ return a `413 Request Entity Too Large` status.
 ## List projects v4
 
 ```shell
-curl "https://airbrake.io/api/v4/projects?key=USER_KEY"
+curl "https://api.airbrake.io/api/v4/projects?key=USER_KEY"
 ```
 
 ```json
@@ -607,7 +607,7 @@ curl "https://airbrake.io/api/v4/projects?key=USER_KEY"
 
 ### HTTP request
 
-`GET https://airbrake.io/api/v4/projects?key=USER_KEY`
+`GET https://api.airbrake.io/api/v4/projects?key=USER_KEY`
 
 ### Response
 
@@ -616,7 +616,7 @@ The API returns `200 OK` status code on success.
 ## Show project v4
 
 ```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID?key=USER_KEY"
+curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID?key=USER_KEY"
 ```
 
 ```json
@@ -638,7 +638,7 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID?key=USER_KEY"
 
 ### HTTP request
 
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID?key=USER_KEY`
+`GET https://api.airbrake.io/api/v4/projects/PROJECT_ID?key=USER_KEY`
 
 ### Response
 
@@ -649,12 +649,12 @@ The API returns `200 OK` status code on success.
 ## Create deploy v4
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -d '{"environment":"production","username":"john","email":"john@smith.com","repository":"https://github.com/airbrake/airbrake","revision":"38748467ea579e7ae64f7815452307c9d05e05c5","version":"v2.0"}' "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=PROJECT_KEY"
+curl -X POST -H "Content-Type: application/json" -d '{"environment":"production","username":"john","email":"john@smith.com","repository":"https://github.com/airbrake/airbrake","revision":"38748467ea579e7ae64f7815452307c9d05e05c5","version":"v2.0"}' "https://api.airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=PROJECT_KEY"
 ```
 
 ### HTTP request
 
-`POST https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=PROJECT_KEY`
+`POST https://api.airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=PROJECT_KEY`
 
 ### POST data
 
@@ -678,7 +678,7 @@ The API returns `201 Created` status code on success.
 The API returns list of project deploys. See [Pagination](#pagination) section for supported query parameters and response fields.
 
 ```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=USER_KEY"
+curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=USER_KEY"
 ```
 
 ```json
@@ -700,7 +700,7 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=USER_KEY"
 
 ### HTTP request
 
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=USER_KEY`
+`GET https://api.airbrake.io/api/v4/projects/PROJECT_ID/deploys?key=USER_KEY`
 
 ### Response
 
@@ -709,7 +709,7 @@ The API returns `200 OK` status code on success.
 ## Show deploy v4
 
 ```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys/DEPLOY_ID?key=USER_KEY"
+curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/deploys/DEPLOY_ID?key=USER_KEY"
 ```
 
 ```json
@@ -727,7 +727,7 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/deploys/DEPLOY_ID?key=USER_
 
 ### HTTP request
 
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/deploys/DEPLOY_ID?key=USER_KEY`
+`GET https://api.airbrake.io/api/v4/projects/PROJECT_ID/deploys/DEPLOY_ID?key=USER_KEY`
 
 ### Response
 
@@ -744,7 +744,7 @@ Groups are also known as "errors" in the web app.
 The API returns list of groups. See [Pagination](#pagination) section for supported query parameters and response fields.
 
 ```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups?key=USER_KEY"
+curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups?key=USER_KEY"
 ```
 
 ```json
@@ -786,7 +786,7 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups?key=USER_KEY"
 
 ### HTTP request
 
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/groups?key=USER_KEY`
+`GET https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups?key=USER_KEY`
 
 ### Query parameters
 
@@ -806,7 +806,7 @@ The API returns `200 OK` status code on success.
 ## Show group v4
 
 ```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KEY"
+curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KEY"
 ```
 
 ```json
@@ -845,7 +845,7 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KE
 
 ### HTTP request
 
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KEY`
+`GET https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KEY`
 
 ### Response
 
@@ -856,12 +856,12 @@ The API returns `200 OK` status code on success.
 This API removes group from the default list and disables all notifications.
 
 ```shell
-curl -X PUT "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/muted?key=USER_KEY"
+curl -X PUT "https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/muted?key=USER_KEY"
 ```
 
 ### HTTP request
 
-`PUT https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/muted?key=USER_KEY`
+`PUT https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/muted?key=USER_KEY`
 
 ### Response
 
@@ -872,12 +872,12 @@ The API returns `204 No Content` status code on success.
 Opposite of the mute group.
 
 ```shell
-curl -X PUT "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/unmuted?key=USER_KEY"
+curl -X PUT "https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/unmuted?key=USER_KEY"
 ```
 
 ### HTTP request
 
-`PUT https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/unmuted?key=USER_KEY`
+`PUT https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/unmuted?key=USER_KEY`
 
 ### Response
 
@@ -890,19 +890,19 @@ The API permanently deletes group.
 <aside class="warning">This operation can not be undone. Use it with care.</aside>
 
 ```shell
-curl -X DELETE "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KEY"
+curl -X DELETE "https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KEY"
 ```
 
 ### HTTP request
 
-`DELETE https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KEY`
+`DELETE https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID?key=USER_KEY`
 
 ## List groups across all projects v4
 
 The API returns list of groups across all projects. See [Cursor pagination](#cursor-pagination) section for supported query parameters and response fields.
 
 ```shell
-curl "https://airbrake.io/api/v4/groups?key=USER_KEY"
+curl "https://api.airbrake.io/api/v4/groups?key=USER_KEY"
 ```
 
 ```json
@@ -944,7 +944,7 @@ curl "https://airbrake.io/api/v4/groups?key=USER_KEY"
 
 ### HTTP request
 
-`GET https://airbrake.io/api/v4/groups?key=USER_KEY`
+`GET https://api.airbrake.io/api/v4/groups?key=USER_KEY`
 
 ### Response
 
@@ -955,7 +955,7 @@ The API returns `200 OK` status code on success.
 The API returns statistics for the group.
 
 ```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/stats?key=USER_KEY"
+curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/stats?key=USER_KEY"
 ```
 
 ```json
@@ -970,7 +970,7 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/stats?key=U
 
 ### HTTP request
 
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/stats?key=USER_KEY`
+`GET https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/stats?key=USER_KEY`
 
 ### Query parameters
 
@@ -995,7 +995,7 @@ Notices are also known as "occurrences" in the web app.
 The API returns list of group notices. See [Pagination](#pagination) section for supported query parameters and response fields.
 
 ```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/notices?key=USER_KEY"
+curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/notices?key=USER_KEY"
 ```
 
 ```json
@@ -1014,7 +1014,7 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/notices?key
 
 ### HTTP request
 
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/notices?key=USER_KEY`
+`GET https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/notices?key=USER_KEY`
 
 ### Query parameters
 
@@ -1045,11 +1045,11 @@ The API returns notice status:
 
 Note that `NOTICE_UUID` is returned by [error notification API v3](#create-notice-v3).
 
-`curl "https://airbrake.io/api/v4/projects/PROJECT_ID/notice-status/NOTICE_UUID?key=USER_KEY"`
+`curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/notice-status/NOTICE_UUID?key=USER_KEY"`
 
 
 ```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/notice-status/NOTICE_UUID?key=USER_KEY"
+curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/notice-status/NOTICE_UUID?key=USER_KEY"
 ```
 
 ```json
@@ -1075,7 +1075,7 @@ The API returns list of project activities. See [Pagination](#pagination) sectio
 ## List project activities v4
 
 ```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/activities?key=USER_KEY"
+curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/activities?key=USER_KEY"
 ```
 
 ```json
@@ -1110,7 +1110,7 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/activities?key=USER_KEY"
 
 ### HTTP request
 
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/activities?key=USER_KEY`
+`GET https://api.airbrake.io/api/v4/projects/PROJECT_ID/activities?key=USER_KEY`
 
 ### Response
 
@@ -1121,7 +1121,7 @@ The API returns `200 OK` status code on success.
 The API returns statistics for the project.
 
 ```shell
-curl "https://airbrake.io/api/v4/projects/PROJECT_ID/stats?key=USER_KEY"
+curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/stats?key=USER_KEY"
 ```
 
 ```json
@@ -1136,7 +1136,7 @@ curl "https://airbrake.io/api/v4/projects/PROJECT_ID/stats?key=USER_KEY"
 
 ### HTTP request
 
-`GET https://airbrake.io/api/v4/projects/PROJECT_ID/stats?key=USER_KEY`
+`GET https://api.airbrake.io/api/v4/projects/PROJECT_ID/stats?key=USER_KEY`
 
 ### Query parameters
 
@@ -1155,12 +1155,12 @@ The API returns `200 OK` status code on success.
 ## Create iOS crash report v3
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -d '{"report":"REPORT_TEXT"}' "https://airbrake.io/api/v3/projects/PROJECT_ID/ios-reports?key=PROJECT_KEY"
+curl -X POST -H "Content-Type: application/json" -d '{"report":"REPORT_TEXT"}' "https://api.airbrake.io/api/v3/projects/PROJECT_ID/ios-reports?key=PROJECT_KEY"
 ```
 
 ### HTTP request
 
-`POST https://airbrake.io/api/v3/projects/PROJECT_ID/ios-reports?key=PROJECT_KEY`
+`POST https://api.airbrake.io/api/v3/projects/PROJECT_ID/ios-reports?key=PROJECT_KEY`
 
 ### POST data
 
