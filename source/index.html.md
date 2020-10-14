@@ -1000,15 +1000,70 @@ curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/groups/GROUP_ID/notices
 
 ```json
 {
+  "count": 12345,
   "notices": [
     {
-      "id": "1272072008639432675",
-      "projectId": 1,
-      "groupId": "1272072008639432676",
-      "createdAt": "2014-10-22T03:00:00.407Z"
+      "id": "1234560000000",
+      "projectId": 100,
+      "groupId": "2340000",
+      "deployId": "34560000",
+      "deployAt": "2020-09-21T21:44:30.72Z",
+      "errors": [
+        {
+          "type": "RestClient::NotFound",
+          "message": "404 Not Found",
+          "backtrace": [
+            {
+              "file": "/restclient/abstract_response.rb",
+              "function": "exception_with_response",
+              "line": 223,
+              "column": 0,
+              "code": null
+            },
+            {
+              "file": "/restclient/abstract_response.rb",
+              "function": "return!",
+              "line": 103,
+              "column": 0,
+              "code": null
+            }
+          ]
+        }
+      ],
+      "context": {
+        "environment": "staging",
+        "hostname": "staging-host-2",
+        "language": "ruby/2.7.0",
+        "messageParams": {
+          "0": 404
+        },
+        "messagePattern": "{} Not Found",
+        "notifier": {
+          "name": "airbrake-ruby",
+          "url": "https://github.com/airbrake/airbrake-ruby",
+          "version": "5.0.2"
+        },
+        "os": "x86_64-linux",
+        "remoteAddr": "12.12.12.12",
+        "remoteCountry": "United States",
+        "remoteCountryCode": "US",
+        "repository": "git@github.com:example/example-app.git",
+        "revision": "abcdef12345",
+        "rootDirectory": "/root/123",
+        "severity": "error"
+      },
+      "environment": {
+        "program_name": "JobWorker"
+      },
+      "session": null,
+      "params": {
+        "http_body": null,
+        "http_code": null
+      },
+      "createdAt": "2020-09-21T22:48:00.385Z"
     }
   ],
-  "count": 1
+  "page": 1
 }
 ```
 
