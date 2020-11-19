@@ -340,6 +340,57 @@ A successful `PUT` to this endpoint returns a `204` No Content. If any
 required fields are missing the `PUT` fails and returns a `400` Bad Request and
 the message in the response will state which key is missing.
 
+## Queue stats
+
+The queue stats endpoint accepts data for tracking
+[background job (AKA queues) analysis](https://airbrake.io/blog/airbrake-feature/performance-monitoring-now-tracks-background-jobs).
+
+**PUT data**
+
+The API expects JSON data to be sent with this request. Your `PROJECT_ID` and
+`PROJECT_KEY` are required to authenticate and report queue data.
+
+> **PUT /api/v5/projects/PROJECT_ID/queues-stats**
+
+```shell
+curl -X PUT -H "Content-Type: application/json" \
+"https://api.airbrake.io/api/v5/projects/PROJECT_ID/queues-stats?key=PROJECT_KEY" \
+-d '{
+  "environment": "production",
+  "queues": [
+    {
+      "queue": "NotificationWorker",
+      "errorCount": 1,
+      "count": 1,
+      "sum": 60000.0,
+      "sumsq": 3600000000.0,
+      "tdigest": "AAAAAkA0AAAAAAAAAAAAAUdqYAAB",
+      "time": "2020-01-16T00:00:00+00:00"
+      }
+    }
+  ]
+}'
+```
+
+Field | Required | Type | Description
+---|---|---|---
+environment | true | String | The environment the queue stat was reported from
+queues[] | true | Array | An array of queue stat objects detailing the performance of each
+queues/{i}/queue | true | String | Name of queue
+queues/{i}/errorCount | true | Integer | Count of errors related to the queue
+queues/{i}/count | true | Integer | The number of instances the queue stat covers
+queues/{i}/sum | true | Float | Queue running duration in milliseconds
+queues/{i}/sumsq | true | Float | The `sum` above squared
+queues/{i}/tdigest | true | String | The queue's percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
+queues/{i}/time | true | String | The UTC time of the queue stat to the minute, in [RFC3339 format](https://tools.ietf.org/html/rfc3339)
+
+
+### Responses
+
+A successful `PUT` to this endpoint returns a `204` No Content. If any
+required fields are missing the `PUT` fails and returns a `400` Bad Request and
+the message in the response will state which key is missing.
+
 # Error notification v3
 
 ## Create notice v3
