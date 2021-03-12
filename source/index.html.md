@@ -238,7 +238,7 @@ curl -X PUT -H "Content-Type: application/json" \
             "sumsq": 160.0,
             "tdigest": "AAAAAkA0AAAAAAAAAAAAAUPSgAAB"
           }
-        {
+        }
       ]
     }
   ]
