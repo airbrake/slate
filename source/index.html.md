@@ -222,24 +222,20 @@ curl -X PUT -H "Content-Type: application/json" \
       "sumsq": 2500.0,
       "tdigest": "AAAAAkA0AAAAAAAAAAAAAUdqYAAB",
       "time": "2019-09-19T18:00:00+00:00",
-      "groups": [
-        {
-          "db": {
-            "count": 1,
-            "sum": 10.0,
-            "sumsq": 100.0,
-            "tdigest": "AAAAAkA0AAAAAAAAAAAAAUMDAAAB"
-          }
+      "groups": {
+        "db": {
+          "count": 1,
+          "sum": 10.0,
+          "sumsq": 100.0,
+          "tdigest": "AAAAAkA0AAAAAAAAAAAAAUMDAAAB"
         },
-        {
-          "view": {
-            "count": 1,
-            "sum": 40.0,
-            "sumsq": 160.0,
-            "tdigest": "AAAAAkA0AAAAAAAAAAAAAUPSgAAB"
-          }
+        "view": {
+          "count": 1,
+          "sum": 40.0,
+          "sumsq": 160.0,
+          "tdigest": "AAAAAkA0AAAAAAAAAAAAAUPSgAAB"
         }
-      ]
+      }
     }
   ]
 }'
@@ -257,12 +253,12 @@ routes/{i}/sum | true | Float | The route response time in milliseconds
 routes/{i}/sumsq | true | Float | The `sum` above squared
 routes/{i}/tdigest | true | String | The routes percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
 routes/{i}/time | true | String | The UTC time of the route activity to the minute, in [RFC3339 format](https://tools.ietf.org/html/rfc3339) `'2019-09-19T18:00:00+00:00'`
-routes/{i}/groups[] | true | Array | An array of group objects describing each pieces performance
-routes/{i}/groups{i}/label | true | Object | Object with a label e.g. `database`, `view`, `cache`, `http`, ...
-routes/{i}/groups{i}/label/count | true | Integer | The number of requests for this group
-routes/{i}/groups{i}/label/sum | true | Float | The response time in milliseconds for this group
-routes/{i}/groups{i}/label/sumsq | true | Float | The sum above squared
-routes/{i}/groups{i}/label/tdigest | true | String | The group's percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
+routes/{i}/groups | true | Object | An object describing individual pieces of performance
+routes/{i}/groups/label | true | Object | Object with a label e.g. `database`, `view`, `cache`, `http`, ...
+routes/{i}/groups/label/count | true | Integer | The number of requests for this group
+routes/{i}/groups/label/sum | true | Float | The response time in milliseconds for this group
+routes/{i}/groups/label/sumsq | true | Float | The sum above squared
+routes/{i}/groups/label/tdigest | true | String | The group's percentile info as a t-digest, [More info on t-digests](https://github.com/tdunning/t-digest)
 
 ### Responses
 
