@@ -32,7 +32,7 @@ You must replace `(PROJECT_KEY|USER_KEY|USER_TOKEN)` with your personal key.
 ## Create user token v4
 
 ```shell
-curl -d "email=EMAIL&password=PASSWORD" "https://airbrake.io/api/v4/sessions"
+curl -d "email=EMAIL&password=PASSWORD" "https://api.airbrake.io/api/v4/sessions"
 ```
 
 ```json
@@ -43,7 +43,7 @@ curl -d "email=EMAIL&password=PASSWORD" "https://airbrake.io/api/v4/sessions"
 
 ### HTTP request
 
-`POST https://airbrake.io/api/v4/sessions`
+`POST https://api.airbrake.io/api/v4/sessions`
 
 ### POST data
 

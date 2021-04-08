@@ -60,7 +60,18 @@ You can now see the docs at http://localhost:4567. Whoa! That was fast!
 
 Now that Slate is all set up on your machine, you'll probably want to learn more about [editing Slate markdown](https://github.com/lord/slate/wiki/Markdown-Syntax), or [how to publish your docs](https://github.com/lord/slate/wiki/Deploying-Slate).
 
+NOTE: If you have issues installing the `ffi` gem, try (from https://stackoverflow.com/questions/64098041/cant-install-ffi-v-1-9-18-on-macos-catalina):
+
+```
+gem install ffi -v '1.9.17' --user-install -- --with-cflags="-Wno-error=implicit-function-declaration"
+```
+
 If you'd prefer to use Docker, instructions are available [in the wiki](https://github.com/lord/slate/wiki/Docker).
+
+```
+docker pull slatedocs/slate
+docker run --rm --name slate -p 4567:4567 -v $(pwd)/source:/srv/slate/source slatedocs/slate serve
+```
 
 Companies Using Slate
 ---------------------------------
