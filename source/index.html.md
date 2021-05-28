@@ -1252,6 +1252,91 @@ limit | 100 | Limits number of results.
 
 The API returns `200 OK` status code on success.
 
+# Source maps v4
+
+## Create source map v4
+
+```shell
+curl -X POST -F file=@app.min.js.map -F name="https://example.com/app.min.js.map" -F pattern="%/app.min.js" "https://api.airbrake.io/api/v4/projects/PROJECT_ID/sourcemaps?key=USER_KEY"
+```
+
+```json
+{
+  "id": "100"
+}
+```
+### HTTP request
+
+`POST https://api.airbrake.io/api/v4/projects/PROJECT_ID/sourcemaps?key=USER_KEY`
+
+### POST data
+
+Key | Description
+--- | -------
+file | Your source map file
+name | The location of your minified version of `app.js` that should be publicly available
+pattern | The optional pattern="%/app.min.js" is a SQL LIKE pattern and it tells Airbrake to apply the uploaded source map to all files that match the pattern. An underscore (`_`) in pattern stands for (matches) any single character; a percent sign (`%`) matches any sequence of zero or more characters
+
+### Response
+
+The API returns `201 Created` status code on success.
+
+## List source maps v4
+
+```shell
+curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/sourcemaps?key=USER_KEY"
+```
+
+```json
+{
+  "sourcemaps": [
+    {
+      "id": "100",
+      "projectId": 1,
+      "name": "https://example.com/app.min.js.map",
+      "pattern": "%/app.min.js",
+      "usedAt": "2021-05-28T08:20:48.57109Z"
+    }
+  ]
+}
+```
+
+### HTTP request
+
+`GET https://api.airbrake.io/api/v4/projects/PROJECT_ID/sourcemaps?key=USER_KEY`
+
+### Response
+
+The API returns `200 OK` status code on success.
+
+## Show source map v4
+
+```shell
+curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/sourcemaps/SOURCE_MAP_ID?key=USER_KEY"
+```
+
+### HTTP request
+
+`GET https://api.airbrake.io/api/v4/projects/PROJECT_ID/sourcemaps/SOURCE_MAP_ID?key=USER_KEY`
+
+### Response
+
+The API returns `200 OK` status code on success.
+
+## Delete source map v4
+
+The API permanently deletes source map.
+
+<aside class="warning">This operation can not be undone. Use it with care.</aside>
+
+```shell
+curl -X DELETE "https://api.airbrake.io/api/v4/projects/PROJECT_ID/sourcemaps/SOURCE_MAP_ID?key=USER_KEY"
+```
+
+### HTTP request
+
+`DELETE https://api.airbrake.io/api/v4/projects/PROJECT_ID/sourcemaps/SOURCE_MAP_ID?key=USER_KEY`
+
 # iOS crash reports v3
 
 ## Create iOS crash report v3
