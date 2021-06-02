@@ -1279,7 +1279,7 @@ pattern | The optional pattern="%/app.min.js" is a SQL LIKE pattern and it tells
 
 ### Response
 
-The API returns `201 Created` status code on success.
+The API returns `200 OK` status code on success.
 
 ## List source maps v4
 
