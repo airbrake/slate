@@ -1290,6 +1290,7 @@ curl "https://api.airbrake.io/api/v4/projects/PROJECT_ID/sourcemaps?key=USER_KEY
 
 ```json
 {
+  "count": 1,
   "sourcemaps": [
     {
       "id": "100",
